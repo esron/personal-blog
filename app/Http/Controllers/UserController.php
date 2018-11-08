@@ -93,4 +93,16 @@ class UserController extends Controller
 
         return back();
     }
+
+    public function newComment(Request $request)
+    {
+        $comment = new Comment();
+        $comment->content = $request['comment'];
+        $comment->user_id = Auth::id();
+        $comment->post_id = $request['post'];
+
+        $comment->save();
+
+        return back();
+    }
 }
