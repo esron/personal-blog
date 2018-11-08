@@ -32,8 +32,7 @@
                                 <td>{{ $post->comments->count() }}</td>
                                 <td>
                                     <a href="{{ route('postEdit', $post->id) }}" class="btn btn-warning">Edit</a>
-                                    <form method="POST" id="deletePost-{{ $post->id }}"action="{{ route('deletePost', $post->id) }}">@csrf</form>
-                                    <a href="#" onclick="document.getElementById('deletePost-{{ $post->id }}').submit()" class="btn btn-danger">Remove</a>
+                                    <a href="#" data-toggle="modal" data-target="#deletePostModal-{{ $post->id }}" class="btn btn-danger">Remove</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -43,4 +42,26 @@
         </div>
     </div>
 </div>
+
+@foreach (Auth::user()->posts as $post)
+<div class="modal fade" id="deletePostModal-{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">You are about to delete {{ $post->title }}.</h5>
+      </div>
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, keep it</button>
+        <form method="POST" id="deletePost-{{ $post->id }}"action="{{ route('deletePost', $post->id) }}">
+            @csrf
+            <button type="submit" class="btn btn-primary">Yes, delete it</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 @endsection
