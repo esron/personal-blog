@@ -63,6 +63,12 @@
                         <i class="icon icon-user"></i> Users
                     </a>
                 </li>
+
+                <li class="nav-item nav-dropdown">
+                    <a href="{{ route('adminProducts') }}" class="nav-link{{ Route::currentRouteName() == 'adminProducts' ? ' active': '' }}">
+                        <i class="icon icon-basket-loaded"></i> Producs
+                    </a>
+                </li>
             @endif
         </ul>
     </nav>
