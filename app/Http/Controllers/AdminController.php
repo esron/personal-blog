@@ -195,8 +195,11 @@ class AdminController extends Controller
         return back();
     }
 
-    public function deleteProductPost(Request $request, $id)
+    public function deleteProduct(Request $request, $id)
     {
+        $product = Product::findOrFail($id);
+        $product->delete();
 
+        return back();
     }
 }
