@@ -134,12 +134,34 @@ class AdminController extends Controller
 
     public function newProduct()
     {
-
+        return view('admin.newProduct');
     }
 
-    public function newProductPost(Request $request, $id)
+    public function newProductPost(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|string',
+            'thumbnail' => 'required|file',
+            'description' => 'required',
+            'price' => 'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/'
+        ]);
 
+        $product = new Product();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+
+        $thumbnail = $request->file('thumbnail');
+
+        $fileName = $thumbnail->getClientOriginalName();
+
+        $thumbnail->move('product-images', $fileName);
+
+        $product->thumbnail = 'product-images/'.$fileName;
+
+        $product->save();
+
+        return back();
     }
 
     public function editProduct()
