@@ -27,7 +27,7 @@
                         @foreach ($products as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
-                                <td><img src="{{ $product->thumbnail}}" width="100"></td>
+                                <td><img src="{{ asset($product->thumbnail) }}" width="100"></td>
                                 <td><a href="{{ route('adminEditProduct', $product->id) }}">{{ $product->title }}</a></td>
                                 <td>{{ $product->Description }}</td>
                                 <td>{{ $product->price }} USD</td>
