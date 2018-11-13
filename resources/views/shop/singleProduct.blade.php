@@ -26,7 +26,7 @@
         <hr>
         <b>${{ $product->price }} USD</b>
         <br>
-        <a href="#" class="btn btn-primary">Checkout with PayPal</a>
+        <a href="{{ route('shop.orderProduct', $product->id) }}" class="btn btn-primary">Checkout with PayPal</a>
       </div>
     </div>
   </div>
